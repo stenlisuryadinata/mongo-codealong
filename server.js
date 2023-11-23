@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017/books"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/books"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -19,8 +19,8 @@ const Book = mongoose.model('Book', {
   }
 })
 
-if (process.env.RESET_DATABASE) {
-  console.log('Resetting database!')
+// if (process.env.RESET_DATABASE) {
+//   console.log('Resetting database!')
 
   const seedDatabase = async () => {
     await Author.deleteMany()
@@ -43,7 +43,7 @@ if (process.env.RESET_DATABASE) {
     await new Book({ title: "The Hobbit", author: tolkien }).save()
   }
   seedDatabase()
-}
+// }
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
